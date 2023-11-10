@@ -1,23 +1,44 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { useState, useEffect } from 'react';
+
+import api from './services/api'
+
+import imgDesktop from './assets/pattern-divider-desktop.svg'
+import iconDice from './assets/icon-dice.svg'
+
 function App() {
+
+  const [ advices, setAdvices ] = useState({})
+
+  useEffect(() => {
+    api
+    .get("advice")
+    .then(res => setAdvices(res.data.slip))
+    .catch((err) => {
+      console.log("Ops, something goes wrong!")
+    })
+  }, [])
+
+  function refresh(){
+    window.location.reload()
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='boxAdvice'>
+
+        <h4> ADVICE # {advices?.id} </h4>
+
+        <p> "{advices?.advice}" </p>
+
+        <img src={imgDesktop} alt='Img Desktop' />
+
+        <div className='diceBtn' onClick={refresh}>
+          <img src={iconDice} alt='Icon Dice' />
+        </div>
+
+      </div>
     </div>
   );
 }
