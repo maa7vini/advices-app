@@ -5,4 +5,6 @@ Esse projeto é um desafio do site <a href='https://www.frontendmentor.io/challe
 
 ### Web 
 
+![image](https://github.com/maa7vini/advices-app/blob/main/src/assets/desafioWeb.png)
+
 
